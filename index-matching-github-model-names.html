@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A personal portfolio of 3D models and experiments.">
+  <title>Model Portfolio</title>
+
+  <script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js">
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #080808;
+      --text: #f1f1ef;
+      --muted: #999;
+      --border: #292929;
+      --accent: #d9efac;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 30px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 16px/1.6 Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover { color: var(--accent); }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 6px;
+    }
+
+    .shell {
+      max-width: 1320px;
+      padding: 0 56px;
+      margin: auto;
+    }
+
+    header {
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+    }
+
+    .dot { color: var(--accent); }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      font-size: 14px;
+    }
+
+    .intro { padding: 78px 0 64px; }
+
+    .eyebrow,
+    .meta,
+    .small-number {
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .eyebrow {
+      color: #aaa;
+      margin: 0 0 26px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 6.4vw, 88px);
+      font-weight: 500;
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h1 span { color: #777772; }
+
+    .intro-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .intro-bottom p {
+      color: #aaa;
+      margin: 0;
+    }
+
+    .browse {
+      font-size: 14px;
+      border-bottom: 1px solid #666;
+      padding-bottom: 10px;
+      display: flex;
+      gap: 44px;
+    }
+
+    .section-head {
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 0;
+    }
+
+    .section-head h2 {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .meta {
+      color: #91918a;
+      max-width: 240px;
+      text-align: right;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .visual {
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #242424, #111);
+      border: 1px solid #303030;
+    }
+
+    model-viewer {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      --progress-bar-color: var(--accent);
+      --progress-bar-height: 2px;
+    }
+
+    .viewer-help {
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .viewer-status {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      pointer-events: none;
+      background: #161616;
+    }
+
+    .viewer-status[hidden] { display: none; }
+
+    .model-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    .model h3 {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .small-number { color: #777; }
+
+    .model p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      margin: 10px 0 18px;
+      max-width: 34ch;
+    }
+
+    .tag {
+      font-size: 12px;
+      color: #acaca7;
+      border: 1px solid #333;
+      padding: 5px 9px;
+      display: inline-block;
+    }
+
+    .contact {
+      margin-top: 78px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 42px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .contact .eyebrow { margin-bottom: 12px; }
+
+    .contact h2 {
+      font-size: 36px;
+      font-weight: 500;
+      letter-spacing: -1.4px;
+      margin: 0;
+    }
+
+    .contact-description {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .contact-mark {
+      font-size: 66px;
+      color: #777;
+    }
+
+    .discord-contact { margin-top: 24px; }
+
+    .discord-contact .eyebrow {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .discord-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    #discord-name {
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      user-select: all;
+    }
+
+    #copy-discord {
+      font: 14px Arial, sans-serif;
+      border: 1px solid #444;
+      background: #181818;
+      color: #eee;
+      padding: 11px 16px;
+      cursor: pointer;
+    }
+
+    #copy-discord:hover { background: #292929; }
+
+    #copy-status {
+      display: block;
+      min-height: 24px;
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 28px 0 36px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .skip {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      background: white;
+      color: black;
+      padding: 12px;
+      z-index: 20;
+    }
+
+    .skip:focus { top: 10px; }
+
+    @media (max-width: 800px) {
+      .shell { padding: 0 28px; }
+      .grid { gap: 18px; }
+      .intro { padding-top: 60px; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 0 22px; }
+      header { height: 82px; }
+      nav { gap: 20px; }
+      .intro { padding: 48px 0; }
+
+      h1 {
+        font-size: 49px;
+        letter-spacing: -2.8px;
+      }
+
+      .eyebrow { letter-spacing: 0.5px; }
+      .intro-bottom { display: block; }
+
+      .browse {
+        width: fit-content;
+        margin-top: 26px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .visual { height: 360px; }
+      .model p { max-width: 100%; }
+      .contact { margin-top: 48px; }
+      .contact h2 { font-size: 30px; }
+      .contact-mark { display: none; }
+      .meta { max-width: 150px; }
+      footer { flex-wrap: wrap; }
+      footer a { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#models">Skip to models</a>
+
+  <div class="shell">
+    <header>
+      <a class="wordmark" href="#">
+        PORTFOLIO<span class="dot">.</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#models">Models</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">INDEPENDENT WORK / SELECTED MODELS</p>
+
+        <h1>
+          Small models.<br>
+          <span>Thoughtful details.</span>
+        </h1>
+
+        <div class="intro-bottom">
+          <p>
+            A personal collection of models,<br>
+            experiments, and works in progress.
+          </p>
+
+          <a class="browse" href="#models">
+            Explore the collection
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="models" aria-labelledby="models-title">
+        <div class="section-head">
+          <h2 id="models-title">Selected models</h2>
+          <span class="meta">DRAG TO ROTATE · SCROLL TO ZOOM</span>
+        </div>
+
+        <div class="grid">
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/weapon.glb"
+                alt="Interactive 3D weapon model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-1">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-1">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Weapon</h3>
+              <span class="small-number">/ 01</span>
+            </div>
+
+            <p>Weapon 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/hammer.glb"
+                alt="Interactive 3D hammer model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-2">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-2">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Hammer</h3>
+              <span class="small-number">/ 02</span>
+            </div>
+
+            <p>Hammer 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/medieval battle axe 3d model.glb"
+                alt="Interactive 3D medieval battle axe model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-3">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-3">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Medieval Battle Axe</h3>
+              <span class="small-number">/ 03</span>
+            </div>
+
+            <p>Medieval battle axe 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/rock 3d model (3).glb"
+                alt="Interactive 3D rock model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-4">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-4">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Rock</h3>
+              <span class="small-number">/ 04</span>
+            </div>
+
+            <p>Rock 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/round shield 3d model (1).glb"
+                alt="Interactive 3D round shield model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-5">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-5">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Round Shield</h3>
+              <span class="small-number">/ 05</span>
+            </div>
+
+            <p>Round shield 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/volleyball 3d model (1).glb"
+                alt="Interactive 3D volleyball model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-6">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-6">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Volleyball</h3>
+              <span class="small-number">/ 06</span>
+            </div>
+
+            <p>Volleyball 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+
+          <article class="model">
+            <div class="visual">
+              <model-viewer
+                src="models/wooden club 3d model (1).glb"
+                alt="Interactive 3D wooden club model"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1"
+                loading="eager"
+                aria-describedby="help-7">
+              </model-viewer>
+
+              <span class="viewer-status" role="status">
+                Loading 3D model…
+              </span>
+            </div>
+
+            <div class="viewer-help" id="help-7">
+              Drag to rotate · Scroll or pinch to zoom
+            </div>
+
+            <div class="model-title">
+              <h3>Wooden Club</h3>
+              <span class="small-number">/ 07</span>
+            </div>
+
+            <p>Wooden club 3D model.</p>
+            <span class="tag">3D model</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div>
+          <p class="eyebrow">QUESTIONS & COLLABORATIONS</p>
+          <h2>Contact us.</h2>
+
+          <p class="contact-description">
+            For project inquiries, commissions, or a conversation about our work.
+          </p>
+
+          <div class="discord-contact">
+            <span class="eyebrow">DISCORD</span>
+
+            <div class="discord-row">
+              <span id="discord-name">strew.q2</span>
+              <button id="copy-discord" type="button">
+                Copy username
+              </button>
+            </div>
+
+            <span
+              id="copy-status"
+              role="status"
+              aria-live="polite">
+            </span>
+          </div>
+        </div>
+
+        <span class="contact-mark" aria-hidden="true">↗</span>
+      </section>
+    </main>
+
+    <footer>
+      <span>Model portfolio</span>
+      <span>Made with care. © 2026</span>
+      <a href="#">Back to top ↑</a>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("copy-discord").addEventListener("click", async () => {
+      const status = document.getElementById("copy-status");
+
+      try {
+        await navigator.clipboard.writeText("strew.q2");
+        status.textContent = "Username copied. Add strew.q2 on Discord.";
+      } catch {
+        status.textContent = "Select and copy the username above: strew.q2";
+      }
+    });
+
+    document.querySelectorAll("model-viewer").forEach(viewer => {
+      const status = viewer.parentElement.querySelector(".viewer-status");
+
+      viewer.addEventListener("load", () => {
+        status.hidden = true;
+      });
+
+      viewer.addEventListener("error", () => {
+        status.hidden = false;
+        status.textContent = "This model could not load. Please refresh to try again.";
+      });
+
+      if (viewer.loaded) {
+        status.hidden = true;
+      }
+    });
+
+    setTimeout(() => {
+      if (!customElements.get("model-viewer")) {
+        document.querySelectorAll(".viewer-status").forEach(status => {
+          status.textContent =
+            "The 3D viewer could not load. Check your internet connection and refresh.";
+        });
+      }
+    }, 15000);
+  </script>
+</body>
+</html>
