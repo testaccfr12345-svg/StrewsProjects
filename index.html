@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A personal collection of models and experiments.">
+  <title>My Portfolio</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090909;
+      --text: #f2f2f2;
+      --muted: #999;
+      --line: #292929;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 30px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover { color: #cde6ab; }
+
+    a:focus-visible {
+      outline: 2px solid #cde6ab;
+      outline-offset: 6px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 28px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      min-height: 95px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: #cde6ab; }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+    }
+
+    .hero { padding: 85px 0 65px; }
+
+    .label {
+      color: var(--muted);
+      font: 12px/1.6 monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 25px 0;
+      font-size: clamp(46px, 7vw, 88px);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.055em;
+    }
+
+    h1 span { color: #777; }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+    }
+
+    .hero-bottom p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .browse {
+      padding-bottom: 8px;
+      border-bottom: 1px solid #666;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 25px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .preview {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1.15;
+      overflow: hidden;
+      border: 1px solid #303030;
+      background: linear-gradient(135deg, #242424, #111);
+    }
+
+    .preview > span {
+      color: #555;
+      font-size: clamp(90px, 11vw, 140px);
+      letter-spacing: -0.08em;
+      transition: transform 250ms ease, color 250ms ease;
+    }
+
+    .model:hover .preview > span {
+      transform: translateY(-5px);
+      color: #888;
+    }
+
+    .preview small {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      color: #999;
+      font: 12px monospace;
+      letter-spacing: 1px;
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .model-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .model h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .model p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 10px 0 18px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border: 1px solid #333;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .github {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      margin-top: 75px;
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .github h2 {
+      margin: 10px 0 0;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      letter-spacing: -1.5px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      padding: 12px 20px;
+      border: 1px solid #444;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: background 200ms ease;
+    }
+
+    .button:hover { background: #202020; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .hero { padding: 55px 0; }
+      .hero-bottom { align-items: start; flex-direction: column; }
+      .grid { grid-template-columns: 1fr; gap: 36px; }
+      .preview { aspect-ratio: 1.3; }
+      .preview > span { font-size: 140px; }
+      .github { align-items: start; flex-direction: column; }
+      .section-heading .label { letter-spacing: 0; }
+      footer { flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <!-- Replace with your name -->
+      <a class="logo" href="#">PORTFOLIO<span>.</span></a>
+
+      <nav aria-label="Main navigation">
+        <a href="#models">Models</a>
+        <a href="https://github.com/YOUR_USERNAME">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="label">Independent work / Selected models</div>
+
+        <h1>Small models.<br><span>Thoughtful details.</span></h1>
+
+        <div class="hero-bottom">
+          <p>A personal collection of models,<br>experiments, and works in progress.</p>
+          <a class="browse" href="#models">Explore the collection ↓</a>
+        </div>
+      </section>
+
+      <section id="models" aria-labelledby="models-title">
+        <div class="section-heading">
+          <h2 id="models-title">Selected models</h2>
+          <span class="label">01 — 03</span>
+        </div>
+
+        <div class="grid">
+          <!-- MODEL 1: Replace the title and description -->
+          <article class="model">
+            <div class="preview">
+              <!-- To show an image, replace the span below with:
+              <img src="model-1.jpg" alt="Description of your first model">
+              -->
+              <span aria-hidden="true">01</span>
+              <small>MODEL STUDY — 001</small>
+            </div>
+
+            <div class="model-heading">
+              <h3>Model 01</h3>
+              <span class="label">/ 01</span>
+            </div>
+
+            <p>Add a short description of your model and the idea behind it.</p>
+            <span class="tag">Sample project</span>
+          </article>
+
+          <!-- MODEL 2 -->
+          <article class="model">
+            <div class="preview">
+              <span aria-hidden="true">02</span>
+              <small>MODEL STUDY — 002</small>
+            </div>
+
+            <div class="model-heading">
+              <h3>Model 02</h3>
+              <span class="label">/ 02</span>
+            </div>
+
+            <p>Add a short description of your model and its most interesting details.</p>
+            <span class="tag">Sample project</span>
+          </article>
+
+          <!-- MODEL 3 -->
+          <article class="model">
+            <div class="preview">
+              <span aria-hidden="true">03</span>
+              <small>MODEL STUDY — 003</small>
+            </div>
+
+            <div class="model-heading">
+              <h3>Model 03</h3>
+              <span class="label">/ 03</span>
+            </div>
+
+            <p>Add a short description of another experiment or work in progress.</p>
+            <span class="tag">Sample project</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="github">
+        <div>
+          <div class="label">Code & explorations</div>
+          <h2>Behind the models.</h2>
+        </div>
+
+        <a class="button" href="https://github.com/YOUR_USERNAME">
+          View my GitHub ↗
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 · My Portfolio</span>
+      <a href="#">Back to top ↑</a>
+    </footer>
+  </div>
+</body>
+</html>
