@@ -251,8 +251,17 @@
     .discord-contact { margin-top: 24px; }
 
     .discord-contact .eyebrow {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 8px;
+    }
+
+    .discord-icon {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+      fill: currentColor;
     }
 
     .discord-row {
@@ -260,6 +269,39 @@
       align-items: center;
       gap: 20px;
       flex-wrap: wrap;
+    }
+
+    .commission-policy {
+      margin-top: 30px;
+      padding: 22px 24px;
+      border: 1px solid #512424;
+      border-left: 3px solid #b94b4b;
+      background: #120c0c;
+      max-width: 720px;
+    }
+
+    .commission-policy .policy-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #b8b8b3;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .commission-policy strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #df6262;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .commission-policy p {
+      margin: 0;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     #discord-name {
@@ -371,17 +413,17 @@
 
     <main>
       <section class="intro">
-        <p class="eyebrow">INDEPENDENT WORK / SELECTED MODELS</p>
+        <p class="eyebrow">INDEPENDENT 3D MODELER / 3+ YEARS EXPERIENCE</p>
 
         <h1>
-          Small models.<br>
-          <span>Thoughtful details.</span>
+          Professional 3D Modeler.<br>
+          <span>Built for games. Made with detail.</span>
         </h1>
 
         <div class="intro-bottom">
           <p>
-            A personal collection of models,<br>
-            experiments, and works in progress.
+            3+ years of experience creating custom 3D assets for Roblox and game development,<br>
+            including low-poly, high-poly, stylized, and realistic models.
           </p>
 
           <a class="browse" href="#models">
@@ -592,11 +634,18 @@
           <h2>Contact us.</h2>
 
           <p class="contact-description">
-            For project inquiries, commissions, or a conversation about our work.
+            For commissions, project inquiries, or custom 3D modeling work, feel free to reach out.
+            We create turrets, weapons, props, low-poly models, high-poly models, realistic assets,
+            stylized assets, and more. If you have an idea, we can discuss it.
           </p>
 
           <div class="discord-contact">
-            <span class="eyebrow">DISCORD</span>
+            <span class="eyebrow">
+              <svg class="discord-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.54 5.34A16.2 16.2 0 0 0 15.44 4l-.5 1.02a15 15 0 0 0-5.88 0L8.55 4a16.3 16.3 0 0 0-4.1 1.34C1.86 9.18 1.16 12.9 1.5 16.56a16.5 16.5 0 0 0 5.02 2.5l1.22-1.67a10.4 10.4 0 0 1-1.92-.92l.47-.36c3.7 1.72 7.72 1.72 11.38 0l.48.36c-.61.36-1.25.67-1.92.92l1.22 1.67a16.4 16.4 0 0 0 5.02-2.5c.4-4.24-.68-7.92-2.93-11.22ZM8.68 14.35c-1.11 0-2.02-1.02-2.02-2.27s.89-2.27 2.02-2.27c1.14 0 2.04 1.03 2.02 2.27 0 1.25-.89 2.27-2.02 2.27Zm6.64 0c-1.11 0-2.02-1.02-2.02-2.27s.89-2.27 2.02-2.27c1.14 0 2.04 1.03 2.02 2.27 0 1.25-.88 2.27-2.02 2.27Z"/>
+              </svg>
+              DISCORD
+            </span>
 
             <div class="discord-row">
               <span id="discord-name">strew.q2</span>
@@ -610,6 +659,15 @@
               role="status"
               aria-live="polite">
             </span>
+          </div>
+
+          <div class="commission-policy">
+            <span class="policy-label">COMMISSION POLICY</span>
+            <strong>25% UPFRONT PAYMENT REQUIRED</strong>
+            <p>
+              A 25% upfront payment is required before work begins. This secures your commission slot
+              and helps protect both sides during the project.
+            </p>
           </div>
         </div>
 
